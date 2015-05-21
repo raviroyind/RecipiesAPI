@@ -1,0 +1,131 @@
+﻿@section scripts {
+    @Scripts.Render("~/bundles/app")
+}
+
+<div class="page-header">
+    <h1>Recipies Listing</h1>
+</div>
+   <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <div>
+                        <div>Recipies</div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead class="panel-heading">
+                            <tr>
+                                <th>Recipie Name</th>
+                                <th>Chef Name</th>
+                                <th>View Details</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list-unstyled" data-bind="foreach: recipes">
+                            <tr>
+                                <td>
+                                    <span data-bind="text: RecipieName"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: ChefName"></span>
+                                </td>
+                                <td>
+                                    <small><a href="#" class="btn-link" data-bind="click: $parent.getRecipieDetail">Details</a></small>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-default" aria-label="Left Align" data-bind="click: $parent.deleteRecipie">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="alert alert-danger" data-bind="visible: error"><p data-bind="text: error"></p></div>
+        </div>
+        <!-- ko if:detail() -->
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Detail</h2>
+                </div>
+                <table class="table">
+                    <tr><td>Chef</td><td data-bind="text: detail().ChefName"></td></tr>
+                    <tr><td>Recipie</td><td data-bind="text: detail().RecipieName"></td></tr>
+                    <tr><td>Description</td><td data-bind="text: detail().Description"></td></tr>
+                    <tr><td>Prep-Time</td><td data-bind="text: detail().PreparationTime"></td></tr>
+                    <tr><td>Serves</td><td data-bind="text: detail().Serves"></td></tr>
+                    <tr><td>Origin Country</td><td data-bind="text: detail().OriginCountry"></td></tr>
+                </table>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <div>
+                        <div><i class="glyphicon glyphicon-plus"></i>Add Recipie</div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <form class="form-horizontal" data-bind="submit: addRecipie">
+                        <div class="form-group">
+                            <label for="inputChef" class="col-sm-4">Chef</label>
+                            <div class="col-sm-6">
+                                <select data-bind="options:chefs, optionsText: 'Name', value: newRecipie.Chef" class="dropdown"></select>
+                            </div>
+                        </div>
+
+                        <div class="form" data-bind="with: newRecipie">
+                            <div class="form-group">
+                                <label for="inputRecipieName" class="col-sm-4">Recipie Name</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" maxlength="50" id="inputRecipieName" data-bind="value:RecipieName" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputDescription" class="col-sm-4">Description</label>
+                                <div class="col-sm-6">
+                                    <textarea  rows="5" cols="10"  class="form-control" id="inputDescription" data-bind="value:Description" ></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPreparationTime" class="col-sm-4">Prep-Time (minutes)</label>
+                                <div class="col-sm-6">
+                                    <input type="number" max="150" min="5" style="width:80px;" class="form-control" id="inputPreparationTime" data-bind="value:PreparationTime" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputServes" class="col-sm-4">Serves (# of people)</label>
+                                <div class="col-sm-6">
+                                    <input type="number" max="20" min="0" style="width:80px;" step="any" class="form-control" id="inputServes" data-bind="value:Serves" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputOriginCountry" class="col-sm-4">Country of origin</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="inputOriginCountry" data-bind="value:OriginCountry" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="btn-group pull-right">
+                            <button type="submit" class="btn btn-info"><i class="fa fa-save"></i>Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
