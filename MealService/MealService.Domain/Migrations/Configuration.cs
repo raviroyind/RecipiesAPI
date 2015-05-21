@@ -59,7 +59,7 @@ namespace MealService.Domain.Migrations
            },
            new Recipie()
            {
-               Id = 3,
+               Id = 4,
                RecipieName = "Ankimo",
                Description = "The monkfish/anglerfish that unknowingly bestows its liver upon upscale sushi fans is threatened by commercial fishing nets damaging its sea-floor habitat, so it’s possible ankimo won't be around for much longer.",
                PreparationTime = 145,
